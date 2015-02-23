@@ -12,20 +12,24 @@
 	<dict>
 		<key>0407CA7E8CE0896DC3694082142137A4B9D1AED9</key>
 		<string>https://github.com/uchicago-mobi/xctom-MPCS51030-Winter-2015-Assignment-6.git</string>
+		<key>90D6F662ABFF2F415EF54BAB7B177373B97CCB23</key>
+		<string>https://github.com/uchicago-mobi/xctom-MPCS51030-Winter-2015-Assignment-7.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>splittingUpIsEasyToDo/splittingUpIsEasyToDo.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>0407CA7E8CE0896DC3694082142137A4B9D1AED9</key>
+		<string>../../../../MPCS51030-2015-Winter-Assignment6-xuc</string>
+		<key>90D6F662ABFF2F415EF54BAB7B177373B97CCB23</key>
 		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/uchicago-mobi/xctom-MPCS51030-Winter-2015-Assignment-6.git</string>
+	<string>https://github.com/uchicago-mobi/xctom-MPCS51030-Winter-2015-Assignment-7.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>0407CA7E8CE0896DC3694082142137A4B9D1AED9</string>
+	<string>90D6F662ABFF2F415EF54BAB7B177373B97CCB23</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
@@ -35,6 +39,14 @@
 			<string>0407CA7E8CE0896DC3694082142137A4B9D1AED9</string>
 			<key>IDESourceControlWCCName</key>
 			<string>MPCS51030-2015-Winter-Assignment6-xuc</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>90D6F662ABFF2F415EF54BAB7B177373B97CCB23</string>
+			<key>IDESourceControlWCCName</key>
+			<string>MPCS51030-2015-Winter-Assignment7-xuc</string>
 		</dict>
 	</array>
 </dict>

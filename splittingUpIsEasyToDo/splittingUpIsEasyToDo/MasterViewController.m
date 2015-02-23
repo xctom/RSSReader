@@ -64,6 +64,12 @@
 
 
 - (void)downloadData{
+    
+    UIViewController *vc = [[UIViewController alloc] init];
+    vc.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"colorful-triangles-background"]];
+    
+    [self.delegate showSplashing:vc];
+    
     [[SharedNetworking sharedSharedNetworking] getFeedForURL:nil
                                                      success:^(NSDictionary *dictionary, NSError *error) {
                                                          NSDictionary* links = dictionary[@"responseData"][@"feed"][@"entries"];
@@ -84,6 +90,8 @@
                                                          dispatch_async(dispatch_get_main_queue(), ^{
                                                             
                                                              [self.tableView reloadData];
+                                                             
+                                                             [self.delegate dismissSplashing];
                                                              
                                                              //when data is downloaded, stop the spinner
                                                              if(self.refreshControl.refreshing){
@@ -176,8 +184,8 @@
         cell.contentLabel.textColor = [UIColor blackColor];
     }
     
-    cell.selectionStyle = UITableViewCellSelectionStyleGray;
     [cell setSelected:YES];
+    [cell setSelected:NO];
     
     [cell layoutIfNeeded];
     

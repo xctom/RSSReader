@@ -8,12 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "DetailViewController.h"
+#import "DismissSplashingViewDelegate.h"
 
 @class DetailViewController;
 
 @interface MasterViewController : UITableViewController
 
 @property (strong, nonatomic) DetailViewController *detailViewController;
+@property (weak, nonatomic) id<DismissSplashingViewDelegate> delegate;
 
 @end
 

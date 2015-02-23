@@ -9,9 +9,10 @@
 #import <UIKit/UIKit.h>
 #import <Social/Social.h>
 #import "BookmarkTableViewController.h"
+#import "DismissSplashingViewDelegate.h"
 #import "Article.h"
 
-@interface DetailViewController : UIViewController <BookmarkToWebViewDelegate,UIWebViewDelegate, UIPopoverPresentationControllerDelegate>
+@interface DetailViewController : UIViewController <BookmarkToWebViewDelegate,UIWebViewDelegate, UIPopoverPresentationControllerDelegate,DismissSplashingViewDelegate>
 
 //use NSMutableDictionary for adding key "addToFavorite" to avoid duplicate adding
 @property (strong, nonatomic) Article* detailItem;

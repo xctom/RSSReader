@@ -9,5 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @protocol DismissSplashingViewDelegate <NSObject>
-- (void) replacedBy:(id)sender;
+- (void) dismissSplashing;
+- (void) showSplashing:(id)sender;
 @end
