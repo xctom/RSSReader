@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Article.h"
 
 @protocol BookmarkToWebViewDelegate <NSObject>
 

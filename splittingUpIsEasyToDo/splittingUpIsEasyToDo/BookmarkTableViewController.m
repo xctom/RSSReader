@@ -7,6 +7,7 @@
 //
 
 #import "BookmarkTableViewController.h"
+#include "Article.h"
 
 @interface BookmarkTableViewController ()
 
@@ -17,9 +18,33 @@
 @implementation BookmarkTableViewController
 
 - (void) viewDidLoad{
-    //load data from UserDefaults
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    self.bookmarks = [[NSMutableArray alloc] initWithArray:[defaults objectForKey:@"bookmarks"]];
+    
+    //set up as a observer 
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(stateChange)
+                                                 name:UIContentSizeCategoryDidChangeNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(stateChange)
+                                                 name:NSUserDefaultsDidChangeNotification
+                                               object:nil];
+    //read data from plist
+    // File path
+    NSError* err = nil;
+    NSURL *docs = [[NSFileManager new] URLForDirectory:NSDocumentDirectory
+                                              inDomain:NSUserDomainMask
+                                     appropriateForURL:nil
+                                                create:YES
+                                                 error:&err];
+    
+    NSURL* file = [docs URLByAppendingPathComponent:@"bookmarks.plist"];
+    
+    // Read
+    NSData* data = [[NSData alloc] initWithContentsOfURL:file];
+    NSArray* array = (NSArray*)[NSKeyedUnarchiver unarchiveObjectWithData:data];
+    
+    self.bookmarks = [[NSMutableArray alloc] initWithArray:array];
 
     if (self.bookmarks) {
         for (int i = 0; i < self.bookmarks.count; i++) {
@@ -57,16 +82,35 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = (UITableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"bookmarkCell" forIndexPath:indexPath];
     
-    NSDictionary *object = self.bookmarks[indexPath.row];
+    Article *object = self.bookmarks[indexPath.row];
     
-    cell.textLabel.text = object[@"title"];
-    cell.detailTextLabel.text = object[@"contentSnippet"];
+    cell.textLabel.text = object.title;
+    //set font to system preference
+    cell.textLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
+    
+    cell.detailTextLabel.text = object.contentSnippet;
+    //set font to system preference
+    cell.detailTextLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleSubheadline];
+    
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"night_mode"]) {
+        cell.superview.backgroundColor = [UIColor darkGrayColor];
+        cell.backgroundColor = [UIColor darkGrayColor];
+        cell.textLabel.textColor = [UIColor whiteColor];
+        cell.detailTextLabel.textColor = [UIColor whiteColor];
+    }else{
+        cell.superview.backgroundColor = [UIColor whiteColor];
+        cell.backgroundColor = [UIColor whiteColor];
+        cell.textLabel.textColor = [UIColor blackColor];
+        cell.detailTextLabel.textColor = [UIColor blackColor];
+    }
     
     return cell;
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *url = self.bookmarks[indexPath.row][@"link"];
+    
+    Article* object = self.bookmarks[indexPath.row];
+    NSString *url = object.link;
     //send selected item back
     [self.delegate bookmark:self.bookmarks[indexPath.row] sendsURL:[NSURL URLWithString:url]];
     //dismiss the bookmark view
@@ -84,11 +128,24 @@
         [self.bookmarks removeObjectAtIndex:indexPath.row];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
         
-        //update userdefault
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        [defaults setObject:self.bookmarks forKey:@"bookmarks"];
+        //update plist
+        // File path
+        NSError* err = nil;
+        NSURL *docs = [[NSFileManager new] URLForDirectory:NSDocumentDirectory
+                                                  inDomain:NSUserDomainMask
+                                         appropriateForURL:nil
+                                                    create:YES
+                                                     error:&err];
         
+        NSURL* file = [docs URLByAppendingPathComponent:@"bookmarks.plist"];
+        
+        NSData* bookmarkData = [NSKeyedArchiver archivedDataWithRootObject:self.bookmarks];
+        [bookmarkData writeToURL:file atomically:NO];
     }
+}
+
+-(void)stateChange{
+    [self.tableView reloadData];
 }
 
 @end

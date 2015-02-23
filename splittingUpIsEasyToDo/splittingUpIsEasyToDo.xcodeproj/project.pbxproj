@@ -17,7 +17,9 @@
 		4438CC661A8C589B008D9794 /* splittingUpIsEasyToDoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4438CC651A8C589B008D9794 /* splittingUpIsEasyToDoTests.m */; };
 		4438CC711A8C59A9008D9794 /* SharedNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 4438CC701A8C59A9008D9794 /* SharedNetworking.m */; };
 		4438CC741A8D429C008D9794 /* NewsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4438CC731A8D429C008D9794 /* NewsTableViewCell.m */; };
+		44CD2C0F1A97C9F800B50614 /* Article.m in Sources */ = {isa = PBXBuildFile; fileRef = 44CD2C0E1A97C9F800B50614 /* Article.m */; };
 		44D8D0321A8DE12700B47A52 /* BookmarkTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44D8D0311A8DE12700B47A52 /* BookmarkTableViewController.m */; };
+		44E63B6E1A98524A0080F4EE /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 44E63B6D1A98524A0080F4EE /* Settings.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,8 +52,12 @@
 		4438CC701A8C59A9008D9794 /* SharedNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SharedNetworking.m; sourceTree = "<group>"; };
 		4438CC721A8D429C008D9794 /* NewsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsTableViewCell.h; sourceTree = "<group>"; };
 		4438CC731A8D429C008D9794 /* NewsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsTableViewCell.m; sourceTree = "<group>"; };
+		44CD2C0D1A97C9F800B50614 /* Article.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Article.h; sourceTree = "<group>"; };
+		44CD2C0E1A97C9F800B50614 /* Article.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Article.m; sourceTree = "<group>"; };
+		44CFA4DF1A9AC883006DB692 /* DismissSplashingViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DismissSplashingViewDelegate.h; sourceTree = "<group>"; };
 		44D8D0301A8DE12700B47A52 /* BookmarkTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookmarkTableViewController.h; sourceTree = "<group>"; };
 		44D8D0311A8DE12700B47A52 /* BookmarkTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookmarkTableViewController.m; sourceTree = "<group>"; };
+		44E63B6D1A98524A0080F4EE /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,22 +99,19 @@
 		4438CC451A8C589B008D9794 /* splittingUpIsEasyToDo */ = {
 			isa = PBXGroup;
 			children = (
-				4438CC4A1A8C589B008D9794 /* AppDelegate.h */,
+				44CD2C0C1A97C9B300B50614 /* Network */,
+				44CD2C0B1A97C9A400B50614 /* Detail */,
+				44CD2C0A1A97C99500B50614 /* Master */,
 				4438CC4B1A8C589B008D9794 /* AppDelegate.m */,
-				4438CC4D1A8C589B008D9794 /* MasterViewController.h */,
-				4438CC4E1A8C589B008D9794 /* MasterViewController.m */,
-				4438CC501A8C589B008D9794 /* DetailViewController.h */,
-				4438CC511A8C589B008D9794 /* DetailViewController.m */,
+				4438CC4A1A8C589B008D9794 /* AppDelegate.h */,
 				4438CC531A8C589B008D9794 /* Main.storyboard */,
 				4438CC561A8C589B008D9794 /* Images.xcassets */,
 				4438CC581A8C589B008D9794 /* LaunchScreen.xib */,
 				4438CC461A8C589B008D9794 /* Supporting Files */,
-				4438CC6F1A8C59A9008D9794 /* SharedNetworking.h */,
-				4438CC701A8C59A9008D9794 /* SharedNetworking.m */,
-				4438CC721A8D429C008D9794 /* NewsTableViewCell.h */,
-				4438CC731A8D429C008D9794 /* NewsTableViewCell.m */,
-				44D8D0301A8DE12700B47A52 /* BookmarkTableViewController.h */,
-				44D8D0311A8DE12700B47A52 /* BookmarkTableViewController.m */,
+				44CD2C0D1A97C9F800B50614 /* Article.h */,
+				44CD2C0E1A97C9F800B50614 /* Article.m */,
+				44E63B6D1A98524A0080F4EE /* Settings.bundle */,
+				44CFA4DF1A9AC883006DB692 /* DismissSplashingViewDelegate.h */,
 			);
 			path = splittingUpIsEasyToDo;
 			sourceTree = "<group>";
@@ -137,6 +140,37 @@
 				4438CC641A8C589B008D9794 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		44CD2C0A1A97C99500B50614 /* Master */ = {
+			isa = PBXGroup;
+			children = (
+				4438CC721A8D429C008D9794 /* NewsTableViewCell.h */,
+				4438CC731A8D429C008D9794 /* NewsTableViewCell.m */,
+				4438CC4D1A8C589B008D9794 /* MasterViewController.h */,
+				4438CC4E1A8C589B008D9794 /* MasterViewController.m */,
+			);
+			name = Master;
+			sourceTree = "<group>";
+		};
+		44CD2C0B1A97C9A400B50614 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				44D8D0301A8DE12700B47A52 /* BookmarkTableViewController.h */,
+				44D8D0311A8DE12700B47A52 /* BookmarkTableViewController.m */,
+				4438CC501A8C589B008D9794 /* DetailViewController.h */,
+				4438CC511A8C589B008D9794 /* DetailViewController.m */,
+			);
+			name = Detail;
+			sourceTree = "<group>";
+		};
+		44CD2C0C1A97C9B300B50614 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				4438CC6F1A8C59A9008D9794 /* SharedNetworking.h */,
+				4438CC701A8C59A9008D9794 /* SharedNetworking.m */,
+			);
+			name = Network;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -219,6 +253,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				44E63B6E1A98524A0080F4EE /* Settings.bundle in Resources */,
 				4438CC551A8C589B008D9794 /* Main.storyboard in Resources */,
 				4438CC5A1A8C589B008D9794 /* LaunchScreen.xib in Resources */,
 				4438CC571A8C589B008D9794 /* Images.xcassets in Resources */,
@@ -239,6 +274,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				44CD2C0F1A97C9F800B50614 /* Article.m in Sources */,
 				4438CC4C1A8C589B008D9794 /* AppDelegate.m in Sources */,
 				4438CC4F1A8C589B008D9794 /* MasterViewController.m in Sources */,
 				44D8D0321A8DE12700B47A52 /* BookmarkTableViewController.m in Sources */,
@@ -372,6 +408,7 @@
 				INFOPLIST_FILE = splittingUpIsEasyToDo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -382,6 +419,7 @@
 				INFOPLIST_FILE = splittingUpIsEasyToDo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

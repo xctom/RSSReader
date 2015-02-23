@@ -17,11 +17,48 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    NSObject *night_mode = (NSObject*)[[NSUserDefaults standardUserDefaults] objectForKey:@"night_mode"];
+    
+    //check for if there already exist setting for nightMode
+    if (!night_mode) {
+        [self registerDefaultsFromSettingsBundle];
+    }
+    
+    //check launch time to set right value to night_mode
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"HH.mm"];
+    NSString *strCurrentTime = [dateFormatter stringFromDate:[NSDate date]];
+    
+    if ([strCurrentTime floatValue] >= 18.00 || [strCurrentTime floatValue]  <= 6.00){
+        NSLog(@"It's night time");
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"night_mode"];
+        [[UINavigationBar appearance] setBarStyle:UIBarStyleBlackTranslucent];
+        [[UINavigationBar appearance] setTitleTextAttributes:@{
+                                                               NSUnderlineStyleAttributeName: @1,
+                                                               NSForegroundColorAttributeName : [UIColor whiteColor],
+                                                               NSFontAttributeName: [UIFont fontWithName:@"AmericanTypewriter" size:17]
+                                                               }];
+    }else{
+        NSLog(@"It's day time");
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"night_mode"];
+        [[UINavigationBar appearance] setBarStyle:UIBarStyleDefault];
+        [[UINavigationBar appearance] setTitleTextAttributes:@{
+                                                               NSUnderlineStyleAttributeName: @1,
+                                                               NSForegroundColorAttributeName : [UIColor blackColor],
+                                                               NSFontAttributeName: [UIFont fontWithName:@"AmericanTypewriter" size:17]
+                                                               }];
+    }
+    
+    
     // Override point for customization after application launch.
     UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;
     UINavigationController *navigationController = [splitViewController.viewControllers lastObject];
     navigationController.topViewController.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem;
     splitViewController.delegate = self;
+    
+    NSLog(@"%@",splitViewController.viewControllers);
+    
     return YES;
 }
 
@@ -41,10 +78,33 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+//use default to set default value 
+- (void)registerDefaultsFromSettingsBundle {
+    NSString *settingsBundle = [[NSBundle mainBundle] pathForResource:@"Settings" ofType:@"bundle"];
+    if(!settingsBundle) {
+        NSLog(@"Could not find Settings.bundle");
+        return;
+    }
+    
+    NSDictionary *settings = [NSDictionary dictionaryWithContentsOfFile:[settingsBundle stringByAppendingPathComponent:@"Root.plist"]];
+    NSArray *preferences = [settings objectForKey:@"PreferenceSpecifiers"];
+    
+    NSMutableDictionary *defaultsToRegister = [[NSMutableDictionary alloc] initWithCapacity:[preferences count]];
+    for(NSDictionary *prefSpecification in preferences) {
+        NSString *key = [prefSpecification objectForKey:@"Key"];
+        if(key && [[prefSpecification allKeys] containsObject:@"DefaultValue"]) {
+            [defaultsToRegister setObject:[prefSpecification objectForKey:@"DefaultValue"] forKey:key];
+        }
+    }
+    
+    [[NSUserDefaults standardUserDefaults] registerDefaults:defaultsToRegister];
 }
 
 #pragma mark - Split view
