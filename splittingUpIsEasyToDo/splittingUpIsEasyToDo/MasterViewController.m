@@ -21,7 +21,7 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    self.clearsSelectionOnViewWillAppear = NO;
+    self.clearsSelectionOnViewWillAppear = YES;
     self.preferredContentSize = CGSizeMake(320.0, 600.0);
 }
 
@@ -30,6 +30,8 @@
     //set estimatedRowHeight and rowHeight
     self.tableView.estimatedRowHeight = 120;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
+    
+    [self.tableView reloadData];
 }
 
 - (void)viewDidLoad {
@@ -65,9 +67,11 @@
 
 - (void)downloadData{
     
+    //create splashing screen
     UIViewController *vc = [[UIViewController alloc] init];
     vc.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"colorful-triangles-background"]];
     
+    //send it to delegate
     [self.delegate showSplashing:vc];
     
     [[SharedNetworking sharedSharedNetworking] getFeedForURL:nil
@@ -88,11 +92,12 @@
                                                          }
                                                          
                                                          dispatch_async(dispatch_get_main_queue(), ^{
-                                                            
-                                                             [self.tableView reloadData];
                                                              
+                                                             //dismiss splashing
                                                              [self.delegate dismissSplashing];
                                                              
+                                                             [self.tableView reloadData];
+
                                                              //when data is downloaded, stop the spinner
                                                              if(self.refreshControl.refreshing){
                                                                  [self.refreshControl endRefreshing];
@@ -110,6 +115,9 @@
                                                          
                                                          //stop spinning
                                                          dispatch_async(dispatch_get_main_queue(), ^{
+                                                             
+                                                             //dismiss splashing
+                                                             [self.delegate dismissSplashing];
                                                              
                                                              if(self.refreshControl.refreshing){
                                                                  [self.refreshControl endRefreshing];
@@ -184,8 +192,9 @@
         cell.contentLabel.textColor = [UIColor blackColor];
     }
     
-    [cell setSelected:YES];
-    [cell setSelected:NO];
+//    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//    [cell setSelected:YES];
+//    [cell setSelected:NO];
     
     [cell layoutIfNeeded];
     

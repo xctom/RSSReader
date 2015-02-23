@@ -8,12 +8,24 @@
 
 #import "AppDelegate.h"
 #import "DetailViewController.h"
+#import "MasterViewController.h"
+#import "DismissSplashingViewDelegate.h"
 
-@interface AppDelegate () <UISplitViewControllerDelegate>
+@interface AppDelegate () <UISplitViewControllerDelegate,DismissSplashingViewDelegate>
 
 @end
 
 @implementation AppDelegate
+
+- (void)showSplashing:(id)sender{
+    UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;
+    [splitViewController presentViewController:(UIViewController*)sender animated:YES completion:nil];
+}
+
+- (void)dismissSplashing{
+    UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;
+    [splitViewController dismissViewControllerAnimated:YES completion:nil];
+}
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -57,7 +69,10 @@
     navigationController.topViewController.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem;
     splitViewController.delegate = self;
     
-    NSLog(@"%@",splitViewController.viewControllers);
+    //set delegate for splashing
+    MasterViewController* mvc = (MasterViewController *)[[splitViewController.viewControllers firstObject] topViewController];
+    
+    mvc.delegate = self;
     
     return YES;
 }

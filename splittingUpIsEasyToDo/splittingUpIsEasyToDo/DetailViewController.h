@@ -12,7 +12,7 @@
 #import "DismissSplashingViewDelegate.h"
 #import "Article.h"
 
-@interface DetailViewController : UIViewController <BookmarkToWebViewDelegate,UIWebViewDelegate, UIPopoverPresentationControllerDelegate,DismissSplashingViewDelegate>
+@interface DetailViewController : UIViewController <BookmarkToWebViewDelegate,UIWebViewDelegate, UIPopoverPresentationControllerDelegate>
 
 //use NSMutableDictionary for adding key "addToFavorite" to avoid duplicate adding
 @property (strong, nonatomic) Article* detailItem;

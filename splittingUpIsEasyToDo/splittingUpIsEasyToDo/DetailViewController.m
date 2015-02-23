@@ -15,18 +15,18 @@
 
 @implementation DetailViewController
 
-- (void)showSplashing:(id)sender{
-    [self presentViewController:(UIViewController*)sender animated:YES completion:nil];
-}
-
-- (void)dismissSplashing{
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
+//- (void)showSplashing:(id)sender{
+//    [self presentViewController:(UIViewController*)sender animated:YES completion:nil];
+//}
+//
+//- (void)dismissSplashing{
+//    [self dismissViewControllerAnimated:YES completion:nil];
+//}
 
 - (void)awakeFromNib{
-    MasterViewController* mvc = (MasterViewController *)[[self.splitViewController.viewControllers firstObject] topViewController];
-    
-    mvc.delegate = self;
+//    MasterViewController* mvc = (MasterViewController *)[[self.splitViewController.viewControllers firstObject] topViewController];
+//    
+//    mvc.delegate = self;
 }
 
 #pragma mark - Managing the detail item
